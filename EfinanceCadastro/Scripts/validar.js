@@ -5,14 +5,13 @@ $(document).ready(function(){
 				required: true,
 				minlength: 3
 			},
-			email:{
-				required: true,
-				email: true
+			codigouf: {
+				required: false,
+				maxlength: 2
 			},
-			idade:{
+			uf: {
 				required: true,
-				number: true,
-				range: [18, 90]
+				maxlength: 2
 			}
 		},
 		messages:{
@@ -20,9 +19,9 @@ $(document).ready(function(){
 				required: "Digite um nome!",
 				minlength: "No minimo 3 letras"
 			},
-			email:{
-				required: "Digite o email!",
-				email: "Digite um email valido!"
+			uf:{
+				required: "Digite a UF!",
+				email: "Digite uma UF válida!"
 			}
 		}
 	});

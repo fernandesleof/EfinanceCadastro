@@ -11,22 +11,22 @@ namespace EfinanceCadastro.Controllers
 {
     public class EstadoController : Controller
     {
-        
+        // GET: Estado
+        public ActionResult Index()
+        {
+            return View();
+        }
+
 
         public ActionResult Listar()
         {
-            using (EstadoModel estadoModel = new EstadoModel())
+            using (EstadoModel model = new EstadoModel())
             {
                 List<Estado> lista = model.Listar();
                 return View(lista);
             }
         }
 
-        // GET: Estado
-        public ActionResult Index()
-        {
-            return View();
-        }
 
         [HttpGet]
         public ActionResult Create()
@@ -42,7 +42,7 @@ namespace EfinanceCadastro.Controllers
             Estado estado = new Estado();
             EstadoModel estadoModel = new EstadoModel();
 
-            estado.codUfEstado = Convert.ToInt32(form["coduf"]);
+            estado.codUfEstado = Convert.ToInt32(form["codigouf"]);
             estado.nomeEstado = form["nome"];
             estado.ufEstado = form["uf"];
 
@@ -56,7 +56,7 @@ namespace EfinanceCadastro.Controllers
             return View();
         }
 
-        [HttpGet]
+        /*[HttpGet]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -66,12 +66,15 @@ namespace EfinanceCadastro.Controllers
             EstadoModel model = new EstadoModel();
             Estado estado = model.GetEstado(id);
             return View(estado);
-        }
+        }*/
 
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int? id)
+        [HttpGet]
+        public ActionResult Delete(int? id)
         {
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
             EstadoModel model = new EstadoModel();
             model.Excluir(Convert.ToInt32(id));
             return RedirectToAction("Listar");
@@ -95,12 +98,11 @@ namespace EfinanceCadastro.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection form, [Bind] Cliente cliente)
+        public ActionResult Edit(int id, FormCollection form, [Bind] Estado estado)
         {
-            Estado estado = new Estado();
             EstadoModel estadoModel = new EstadoModel();
             estado.idEstado = Convert.ToInt32(form["id"]);
-            estado.codUfEstado = Convert.ToInt32(form["coduf"]);
+            estado.codUfEstado = Convert.ToInt32(form["codigouf"]);
             estado.nomeEstado = form["nome"];
             estado.ufEstado = form["uf"];
 

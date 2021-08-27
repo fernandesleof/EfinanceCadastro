@@ -1,0 +1,105 @@
+﻿@model EfinanceCadastro.Models.Estado
+@using EfinanceCadastro.Models
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Alterar</title>
+    <link href="~/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+    <link href="~/dist/css/sb-admin-2.css" rel="stylesheet">
+    <link href="~/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <div id="wrapper">
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+
+            <!-- /.navbar-top-links -->
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li>
+                            <a href="~/Cliente/Listar"><i class="fa fa-dashboard fa-fw"></i> Consulta</a>
+                        </li>
+                        <li>
+                            <a href="~/Cliente/Create"><i class="fa fa-dashboard fa-fw"></i> Cadastro</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Alterar Cliente</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Preencha os campos com os dados solicitados
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <form role="form" method="post" action="Edit">
+                                    <div class="col-lg-8">
+                                        <div class="form-group">
+                                            <label>ID</label>
+                                            <input class="form-control" type="text" name="id" id="id" value="@Html.DisplayFor(model => model.idEstado)" >
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Nome</label>
+                                            <input class="form-control" type="text" name="nome" id="nome" value="@Html.DisplayFor(model => model.nomeEstado)" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Código UF</label>
+                                            <input class="form-control" type="number" name="codigouf" id="codigouf" value="@Html.DisplayFor(model => model.codUfEstado)">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>UF</label>
+                                            <input class="form-control" type="text" name="uf" id="uf" placeholder="ex: SP" value="@Html.DisplayFor(model => model.ufEstado)" required> <!--data-mask="XX"-->
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <button type="submit" id="editar" value="Edit" class="btn btn-success btn-lg">Alterar</button>
+                                            <button type="reset" class="btn btn-warning btn-lg">Limpar</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- /.row (nested) -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /#page-wrapper -->
+    </div>
+    <!-- /#wrapper -->
+    <!-- jQuery -->
+    <script src="@Url.Content("~/vendor/jquery/jquery.min.js")"></script>
+    <script src="@Url.Content("~/vendor/bootstrap/js/bootstrap.min.js")"></script>
+    <script src="@Url.Content("~/vendor/met3isMenu/metisMenu.min.js")"></script>
+    <script src="@Url.Content("~/dist/js/sb-admin-2.js")"></script>
+    <script src="@Url.Content("~/Script/input-mask.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/input-mask.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery-3.3.1.min.js")"></script>
+
+</body>
+</html>

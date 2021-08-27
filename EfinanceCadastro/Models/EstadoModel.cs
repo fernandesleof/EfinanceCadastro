@@ -20,14 +20,15 @@ namespace EfinanceCadastro.Models
         public void Dispose()
         {
             connection.Close();
+          
         }
 
         public List<Estado> Listar()
         {
             List<Estado> lista = new List<Estado>();
             SqlCommand cmd = new SqlCommand();
-            cmd.Connection = connection;
-            cmd.CommandText = @"SELECT idestado,codufestado,nomeestado,ufestado FROM estado AND statusestado = TRUE";
+            cmd.Connection =connection;
+            cmd.CommandText = @"SELECT idestado,codufestado,nomeestado,ufestado FROM estado WHERE statusestado = 'TRUE'";
 
             SqlDataReader reader = cmd.ExecuteReader();
 
@@ -73,7 +74,7 @@ namespace EfinanceCadastro.Models
             Estado estado = new Estado();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = connection;
-            cmd.CommandText = @"SELECT * FROM estado WHERE idestado= @id AND statusestado = true ";
+            cmd.CommandText = @"SELECT * FROM estado WHERE idestado= @id AND statusestado = 'TRUE' ";
             cmd.Parameters.AddWithValue("@id", id);
 
             SqlDataReader reader = cmd.ExecuteReader();
@@ -92,7 +93,7 @@ namespace EfinanceCadastro.Models
         {
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = connection;
-            cmd.CommandText = @"UPDATE estado SET statusestado = FALSE WHERE idcliente = @id";
+            cmd.CommandText = @"UPDATE estado SET statusestado = 'FALSE' WHERE idestado = @id";
 
             cmd.Parameters.AddWithValue("@id", id);
 
@@ -106,7 +107,7 @@ namespace EfinanceCadastro.Models
             cmd.CommandText = @" UPDATE estado SET codufestado = @coduf , nomeestado = @nome , "
                               +" ufestado = @uf WHERE idestado = @idestado                     ";
 
-            cmd.Parameters.AddWithValue("@idestado", estado.codUfEstado);
+            cmd.Parameters.AddWithValue("@idestado", estado.idEstado);
             cmd.Parameters.AddWithValue("@coduf", estado.codUfEstado);
             cmd.Parameters.AddWithValue("@nome", estado.nomeEstado);
             cmd.Parameters.AddWithValue("@uf", estado.ufEstado);
