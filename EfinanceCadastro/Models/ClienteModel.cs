@@ -27,7 +27,7 @@ namespace EfinanceCadastro.Models
             List<Cliente> lista = new List<Cliente>();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = connection;
-            cmd.CommandText = @"SELECT idcliente , nomecliente , telefonecliente FROM cliente WHERE statuscliente = 'TRUE'";
+            cmd.CommandText = @"SELECT idcliente , nomecliente , telefonecliente , idcidade FROM cliente WHERE statuscliente = 'TRUE'";
 
             SqlDataReader reader = cmd.ExecuteReader();
 
@@ -50,7 +50,7 @@ namespace EfinanceCadastro.Models
             int idCliente = 0;
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = connection;
-            cmd.CommandText = @" INSERT INTO cliente(nomecliente,telefonecliente,cpfcnpjcliente) "
+            cmd.CommandText = @" INSERT INTO cliente(nomecliente,telefonecliente,cpfcnpjcliente,idcidade) "
                              + " VALUES (@nome,@telefone,@cpfcnpj,@idcidade)                     ";
 
             cmd.Parameters.AddWithValue("@nome", cliente.nomeCliente);

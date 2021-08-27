@@ -5815,6 +5815,7 @@
     <Compile Include="Controllers\CidadeController.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\EstadoController.cs" />
+    <Compile Include="Controllers\InicialController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -10680,11 +10681,18 @@
     <Content Include="vendor\font-awesome\scss\_spinning.scss" />
     <Content Include="vendor\font-awesome\scss\_stacked.scss" />
     <Content Include="vendor\font-awesome\scss\_variables.scss" />
-    <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Estado\Create.cshtml" />
     <Content Include="Views\Estado\Listar.cshtml" />
     <Content Include="Views\Estado\Edit.cshtml" />
+    <Content Include="Views\Cliente\Create.cshtml" />
+    <Content Include="Views\Cliente\Edit.cshtml" />
+    <Content Include="Views\Cliente\Listar.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Cidade\Create.cshtml" />
+    <Content Include="Views\Cidade\Edit.cshtml" />
+    <Content Include="Views\Cidade\Listar.cshtml" />
+    <Content Include="Views\Inicial\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -10696,8 +10704,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="obj\Debug\TempPE\" />
     <Folder Include="vendor\input-mask\" />
-    <Folder Include="Views\Cidade\" />
-    <Folder Include="Views\Cliente\" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="node_modules\ajv\lib\ajv.d.ts" />

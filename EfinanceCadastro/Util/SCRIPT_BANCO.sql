@@ -24,7 +24,7 @@ idcliente INT PRIMARY KEY IDENTITY,
 idcidade INT NOT NULL,
 nomecliente VARCHAR(60) not null,
 cpfcnpjcliente VARCHAR(15),
-clientetelefone VARCHAR(13),
+telefonecliente VARCHAR(13),
 statuscliente BIT DEFAULT 'TRUE',
 CONSTRAINT fk_clientecidade FOREIGN KEY(idcidade) REFERENCES cidade(idcidade));
 

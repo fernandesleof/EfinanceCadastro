@@ -1,40 +1,88 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <script src="~/Scripts/modernizr-2.8.3.js"></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewBag.Title - EFinance</title>
+    <link href="~/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+    <link href="~/dist/css/sb-admin-2.css" rel="stylesheet">
+    <link href="~/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
+    <div id="wrapper">
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                <a class="navbar-brand" href="index.html"></a>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                </ul>
+
+            <!-- /.navbar-top-links -->
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <ul class="nav" id="side-menu">
+                            <li>
+                                <a href="#"><i class="fa fa-sitemap fa-fw"></i> Cliente<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="~/Cliente/Create">Cadastro</a>
+                                    </li>
+                                    <li>
+                                        <a href="~/Cliente/Listar">Listar</a>
+                                    </li>
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-sitemap fa-fw"></i> Cidade<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="~/Cidade/Create">Cadastro</a>
+                                    </li>
+                                    <li>
+                                        <a href="~/Cidade/Listar">Listar</a>
+                                    </li>
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-sitemap fa-fw"></i> Estado<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="~/Estado/Create">Cadastro</a>
+                                    </li>
+                                    <li>
+                                        <a href="~/Estado/Listar">Listar</a>
+                                    </li>
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+                        </ul>
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
             </div>
-        </div>
-    </div>
+            @Html.ActionLink("Cadastro Admin", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+        </nav>
 
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
     </div>
-
-    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
+    @RenderBody()
+    <!-- /.row -->
+    <!-- /#page-wrapper -->
+    <!-- /#wrapper -->
+    <!-- jQuery -->
+    <script src="@Url.Content("~/vendor/jquery/jquery.min.js")"></script>
+    <script src="@Url.Content("~/vendor/bootstrap/js/bootstrap.min.js")"></script>
+    <script src="@Url.Content("~/vendor/met3isMenu/metisMenu.min.js")"></script>
+    <script src="@Url.Content("~/dist/js/sb-admin-2.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery-3.3.1.min.js")"></script>
 </body>
 </html>

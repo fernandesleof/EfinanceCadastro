@@ -1,6 +1,6 @@
-﻿@{
+﻿
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    Page.Title = "Cadastro de Estado";
 }
 
 <!DOCTYPE html>
@@ -9,6 +9,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pagina Inicial</title>
     <link href="~/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="~/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
     <link href="~/dist/css/sb-admin-2.css" rel="stylesheet">
@@ -18,7 +19,7 @@
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Cadastro de Estado</h1>
+                <h1 class="page-header">Pagina Inicial</h1>
             </div>
             <!-- /.col-lg-12 -->
         </div>
@@ -27,33 +28,10 @@
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        Preencha os campos com os dados solicitados
+                        Selecione no menu a esquerda uma opção
                     </div>
                     <div class="panel-body">
                         <div class="row">
-                            <form role="form" action="/Estado/create" method="post" name="formcadastro">
-
-                                <div class="col-lg-8">
-                                    <div class="form-group">
-                                        <label>Nome</label>
-                                        <input class="form-control" type="text" name="nome" id="nome" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Código UF</label>
-                                        <input class="form-control" type="number" name="codigouf" id="codigouf">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>UF</label>
-                                        <input class="form-control" type="text" name="uf" id="uf" placeholder="ex: SP" required> <!--data-mask="XX"-->
-                                    </div>
-                                </div>
-                                <div class="col-lg-12">
-                                    <div class="form-group">
-                                        <button type="submit" id="cadastrar" class="btn btn-success btn-lg">Cadastrar</button>
-                                        <button type="reset" class="btn btn-warning btn-lg">Limpar</button>
-                                    </div>
-                                </div>
-                            </form>
 
                         </div>
                     </div>
@@ -79,5 +57,9 @@
     <script src="@Url.Content("~/Scripts/jquery-3.3.1.min.js")"></script>
 </body>
 </html>
+
+
+
+
 
 

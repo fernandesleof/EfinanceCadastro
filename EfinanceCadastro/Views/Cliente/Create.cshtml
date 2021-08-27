@@ -1,8 +1,8 @@
-﻿@model EfinanceCadastro.Models.Estado
-@{
+﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    Page.Title = "Alteração de Estado";
+    Page.Title = "Cadastro de Cliente";
 }
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,7 +18,7 @@
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Alteração de Estado</h1>
+                <h1 class="page-header">Cadastro de Clientes</h1>
             </div>
             <!-- /.col-lg-12 -->
         </div>
@@ -31,43 +31,54 @@
                     </div>
                     <div class="panel-body">
                         <div class="row">
-                            <form role="form" method="post" action="Edit">
+                            <form role="form" action="/Cliente/create" method="post" name="formcadastro">
                                 <div class="col-lg-8">
                                     <div class="form-group">
-                                        <label>ID</label>
-                                        <input class="form-control" type="text" name="id" id="id" value="@Html.DisplayFor(model => model.idEstado)">
-                                    </div>
-                                    <div class="form-group">
                                         <label>Nome</label>
-                                        <input class="form-control" type="text" name="nome" id="nome" value="@Html.DisplayFor(model => model.nomeEstado)" required>
+                                        <input class="form-control" type="text" name="nome" id="nome" required>
                                     </div>
                                     <div class="form-group">
-                                        <label>Código UF</label>
-                                        <input class="form-control" type="number" name="codigouf" id="codigouf" value="@Html.DisplayFor(model => model.codUfEstado)">
+                                        <label>Telefone</label>
+                                        <input class="form-control" type="text" name="telefone" id="telefone">
                                     </div>
                                     <div class="form-group">
-                                        <label>UF</label>
-                                        <input class="form-control" type="text" name="uf" id="uf" placeholder="ex: SP" value="@Html.DisplayFor(model => model.ufEstado)" required> <!--data-mask="XX"-->
+                                        <label>CPF ou CNPJ</label>
+                                        <input class="form-control" type="text" name="cpfcnpj" id="cpfcnpj" placeholder="ex: SP" required>
+                                    </div>
+                                    <!--<div class="form-group">
+                                        <label>Código Cidade</label>
+                                        <input class="form-control" type="text" name="idcidade" id="idcidade" placeholder="ex: SP" required>
+                                    </div>-->
+                                    <div class="form-group">
+                                        <label>Estado</label>
+                                        <select class="form-control" name="idcidade">
+                                            @foreach (var cidade in Model)
+                                            {
+                                                <option value="@cidade.idCidade">@cidade.nomeCidade</option>
+                                            }
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
                                     <div class="form-group">
-                                        <button type="submit" id="editar" value="Edit" class="btn btn-success btn-lg">Alterar</button>
+                                        <button type="submit" id="cadastrar" class="btn btn-success btn-lg">Cadastrar</button>
                                         <button type="reset" class="btn btn-warning btn-lg">Limpar</button>
                                     </div>
                                 </div>
                             </form>
+
                         </div>
-                        <!-- /.row (nested) -->
                     </div>
-                    <!-- /.panel-body -->
                 </div>
-                <!-- /.panel -->
+                <!-- /.row (nested) -->
             </div>
-            <!-- /.col-lg-12 -->
+            <!-- /.panel-body -->
         </div>
-        <!-- /.row -->
+        <!-- /.panel -->
     </div>
+    <!-- /.col-lg-12 -->
+    <!-- /.row -->
+    <!-- /#page-wrapper -->
     <!-- /#wrapper -->
     <!-- jQuery -->
     <script src="@Url.Content("~/vendor/jquery/jquery.min.js")"></script>
@@ -76,7 +87,10 @@
     <script src="@Url.Content("~/dist/js/sb-admin-2.js")"></script>
     <script src="@Url.Content("~/Script/input-mask.min.js")"></script>
     <script src="@Url.Content("~/Scripts/input-mask.js")"></script>
+    <script src="@Url.Content("~/Scripts/validar.js")"></script>
+    <script src="@Url.Content("~/Scripts/validate.min.js")"></script>
     <script src="@Url.Content("~/Scripts/jquery-3.3.1.min.js")"></script>
-
 </body>
 </html>
+
+

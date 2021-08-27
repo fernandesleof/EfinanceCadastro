@@ -29,7 +29,11 @@ namespace EfinanceCadastro.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            return View();
+            using (CidadeModel model = new CidadeModel())
+            {
+                List<Cidade> lista = model.Listar();
+                return View(lista);
+            }
         }
 
         [HttpPost]
@@ -39,11 +43,11 @@ namespace EfinanceCadastro.Controllers
             int idCliente = 0;
             Cliente cliente = new Cliente();
             ClienteModel ClienteModel = new ClienteModel();
-
-            cliente.idCidade = Convert.ToInt32(form["codigcidade"]);          
+                    
             cliente.nomeCliente = form["nome"];
             cliente.telefoneCliente = form["telefone"];
             cliente.cpfCnpjCliente = form["cpfcnpj"];
+            cliente.idCidade = Convert.ToInt32(form["idcidade"]);
 
             ClienteModel model = new ClienteModel();
             idCliente = model.CadastroCliente(cliente);
@@ -89,10 +93,11 @@ namespace EfinanceCadastro.Controllers
         public ActionResult Edit(int id, FormCollection form, [Bind] Cliente cliente)
         {
             ClienteModel ClienteModel = new ClienteModel();
-            cliente.idCidade = Convert.ToInt32(form["codigcidade"]);
+            cliente.idCliente = Convert.ToInt32(form["id"]);
             cliente.nomeCliente = form["nome"];
             cliente.telefoneCliente = form["telefone"];
             cliente.cpfCnpjCliente = form["cpfcnpj"];
+            cliente.idCidade = Convert.ToInt32(form["idcidade"]);
 
             ClienteModel.Alterar(cliente);
             return RedirectToAction("Listar");

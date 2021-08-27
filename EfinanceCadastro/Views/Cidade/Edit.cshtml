@@ -1,7 +1,8 @@
-﻿@model EfinanceCadastro.Models.Estado
+﻿@model EfinanceCadastro.Models.Cidade
+@using EfinanceCadastro.Models
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    Page.Title = "Alteração de Estado";
+    Page.Title = "Alteração de Cidade";
 }
 <!DOCTYPE html>
 <html>
@@ -14,11 +15,11 @@
     <link href="~/dist/css/sb-admin-2.css" rel="stylesheet">
     <link href="~/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 </head>
-<body>
+<body>    
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Alteração de Estado</h1>
+                <h1 class="page-header">Alterar Cliente</h1>
             </div>
             <!-- /.col-lg-12 -->
         </div>
@@ -34,20 +35,20 @@
                             <form role="form" method="post" action="Edit">
                                 <div class="col-lg-8">
                                     <div class="form-group">
-                                        <label>ID</label>
-                                        <input class="form-control" type="text" name="id" id="id" value="@Html.DisplayFor(model => model.idEstado)">
+                                        <label>ID Estado</label>
+                                        <input class="form-control" type="number" name="id" id="id" value="@Html.DisplayFor(model => model.idCidade)">
                                     </div>
                                     <div class="form-group">
                                         <label>Nome</label>
-                                        <input class="form-control" type="text" name="nome" id="nome" value="@Html.DisplayFor(model => model.nomeEstado)" required>
+                                        <input class="form-control" type="text" name="nome" id="nome" value="@Html.DisplayFor(model => model.nomeCidade)" required>
                                     </div>
                                     <div class="form-group">
-                                        <label>Código UF</label>
-                                        <input class="form-control" type="number" name="codigouf" id="codigouf" value="@Html.DisplayFor(model => model.codUfEstado)">
+                                        <label>ID Estado</label>
+                                        <input class="form-control" type="number" name="idestado" id="idestado" value="@Html.DisplayFor(model => model.idEstado)">
                                     </div>
                                     <div class="form-group">
-                                        <label>UF</label>
-                                        <input class="form-control" type="text" name="uf" id="uf" placeholder="ex: SP" value="@Html.DisplayFor(model => model.ufEstado)" required> <!--data-mask="XX"-->
+                                        <label>Código IBGE</label>
+                                        <input class="form-control" type="number" name="codibge" id="codibge" value="@Html.DisplayFor(model => model.codigoIbgeCidade)">
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
@@ -68,6 +69,7 @@
         </div>
         <!-- /.row -->
     </div>
+    <!-- /#page-wrapper -->
     <!-- /#wrapper -->
     <!-- jQuery -->
     <script src="@Url.Content("~/vendor/jquery/jquery.min.js")"></script>
