@@ -33,7 +33,6 @@ namespace EfinanceCadastro.Controllers
                 List<Estado> lista = model.Listar();
                 return View(lista);
             }
-            //return View();
         }
 
         [HttpPost]
@@ -81,7 +80,15 @@ namespace EfinanceCadastro.Controllers
             CidadeModel model = new CidadeModel();
             Cidade cidade = model.GetCidade(id);
 
-            return View(cidade);
+            using (EstadoModel modelestado = new EstadoModel())
+            {
+                List<Estado> listaestado = modelestado.Listar();
+                ViewBag.DadosEstado = listaestado;
+                ViewBag.Estado = new SelectList(listaestado,"idestado","nomeestado");
+            }
+
+            ViewBag.DadosCidade = cidade;
+            return View();
 
         }
 

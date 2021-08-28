@@ -1,8 +1,7 @@
-﻿@model EfinanceCadastro.Models.Cliente
-@using EfinanceCadastro.Models
-@{
+﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    Page.Title = "Alteração de Cidade";
+    Page.Title = "Alteração de Cliente";
+    EfinanceCadastro.Models.Cliente cliente = (EfinanceCadastro.Models.Cliente)ViewBag.DadosCliente;
 }
 <!DOCTYPE html>
 <html>
@@ -19,7 +18,7 @@
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Alterar Cliente</h1>
+                <h1 class="page-header">Alteração de Cliente</h1>
             </div>
             <!-- /.col-lg-12 -->
         </div>
@@ -36,23 +35,35 @@
                                 <div class="col-lg-8">
                                     <div class="form-group">
                                         <label>ID</label>
-                                        <input class="form-control" type="text" name="id" id="id" value="@Html.DisplayFor(model => model.idCliente)">
+                                        <input class="form-control" type="text" name="id" id="id" value="@cliente.idCliente" readonly>
                                     </div>
                                     <div class="form-group">
                                         <label>Nome</label>
-                                        <input class="form-control" type="text" name="nome" id="nome" value="@Html.DisplayFor(model => model.nomeCliente)" required>
+                                        <input class="form-control" type="text" name="nome" id="nome" maxlength="60" value="@cliente.nomeCliente" required>
                                     </div>
                                     <div class="form-group">
                                         <label>Telefone</label>
-                                        <input class="form-control" type="text" name="telefone" id="telefone" value="@Html.DisplayFor(model => model.telefoneCliente)">
+                                        <input class="form-control" type="text" name="telefone" id="telefone" maxlength="12" value="@cliente.telefoneCliente" data-mask="(00)00000-0000" placeholder="ex:(17)91122-3344">
                                     </div>
                                     <div class="form-group">
                                         <label>CPF ou CNPJ</label>
-                                        <input class="form-control" type="text" name="cpfcnpj" id="cpfcnpj" value="@Html.DisplayFor(model => model.cpfCnpjCliente)" required>
+                                        <input class="form-control" type="text" name="cpfcnpj" id="cpfcnpj" maxlength="14" value="@cliente.cpfCnpjCliente" required>
                                     </div>
                                     <div class="form-group">
-                                        <label>Código Cidade</label>
-                                        <input class="form-control" type="text" name="idcidade" id="idcidade" value="@Html.DisplayFor(model => model.idCidade)" required>
+                                        <label>Estado</label>
+                                        <select class="form-control" name="idcidade">
+                                            @foreach (var cidade in ViewBag.DadosCidade)
+                                            {
+                                                if (cidade.idCidade == cliente.idCidade)
+                                                {
+                                                    <option value="@cidade.idCidade" selected> @cidade.nomeCidade </option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="@cidade.idCidade"> @cidade.nomeCidade </option>
+                                                }
+                                            }
+                                        </select>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="form-group">

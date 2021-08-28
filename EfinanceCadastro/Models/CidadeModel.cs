@@ -28,7 +28,7 @@ namespace EfinanceCadastro.Models
             List<Cidade> lista = new List<Cidade>();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = connection;
-            cmd.CommandText = @"SELECT idcidade , idestado , nomecidade , codigoibgecidade FROM cidade WHERE statuscidade = 'TRUE'";
+            cmd.CommandText = @" SELECT * FROM listarcidade ORDER BY nomecidade ";
 
             SqlDataReader reader = cmd.ExecuteReader();
 
@@ -48,11 +48,16 @@ namespace EfinanceCadastro.Models
 
         public void CadastroCidade(Cidade cidade)
         {
-
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = connection;
-            cmd.CommandText = @" INSERT INTO cidade( idestado , nomecidade , codigoibgecidade) "
-                             + " VALUES ( @idestado , @nome , @codigoibge)                     ";
+            /*cmd.CommandText = @" INSERT INTO cidade( idestado , nomecidade , codigoibgecidade) "
+                             + " VALUES ( @idestado , @nome , @codigoibge)                     ";*/
+            cmd.CommandText = @"EXECUTE crudCidade             "
+                           + "@pidcidade = 0,                  "
+                           + "@pidestado = @idestado,          "
+                           + "@pnome = @nome,                  "
+                           + "@pcodigoibge = @codigoibge,      "
+                           + "@ptipo = 'I'                     ";
 
             cmd.Parameters.AddWithValue("@idestado", cidade.idEstado);
             cmd.Parameters.AddWithValue("@nome", cidade.nomeCidade);
@@ -66,7 +71,7 @@ namespace EfinanceCadastro.Models
             Cidade cidade = new Cidade();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = connection;
-            cmd.CommandText = @"SELECT * FROM Cidade WHERE idCidade= @id AND statusCidade = 'TRUE' ";
+            cmd.CommandText = @" SELECT * FROM listarcidade WHERE idcidade= @id ";
             cmd.Parameters.AddWithValue("@id", id);
 
             SqlDataReader reader = cmd.ExecuteReader();
@@ -85,7 +90,13 @@ namespace EfinanceCadastro.Models
         {
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = connection;
-            cmd.CommandText = @"UPDATE cidade SET statusCidade = 'FALSE' WHERE idcidade = @id";
+            /*cmd.CommandText = @"UPDATE cidade SET statusCidade = 'FALSE' WHERE idcidade = @id";*/
+            cmd.CommandText = @"EXECUTE crudCidade             "
+                           + "@pidcidade = @id,                "
+                           + "@pidestado = 0,                  "
+                           + "@pnome = '',                     "
+                           + "@pcodigoibge = '',               "
+                           + "@ptipo = 'D'                     ";
 
             cmd.Parameters.AddWithValue("@id", id);
 
@@ -96,8 +107,14 @@ namespace EfinanceCadastro.Models
         {
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = connection;
-            cmd.CommandText = @" UPDATE cidade SET idestado =@idestado , nomecidade =@nome , "
-                              + "  codigoibgecidade =@codigoibge  WHERE idcidade = @idcidade   ";
+            /*cmd.CommandText = @" UPDATE cidade SET idestado =@idestado , nomecidade =@nome , "
+                              + "  codigoibgecidade =@codigoibge  WHERE idcidade = @idcidade   ";*/
+            cmd.CommandText = @"EXECUTE crudCidade              "
+                            + "@pidcidade = @idcidade,          "
+                            + "@pidestado = @idestado,          "
+                            + "@pnome = @nome,                  "
+                            + "@pcodigoibge = @codigoibge,      "
+                            + "@ptipo = 'U'                     ";
 
             cmd.Parameters.AddWithValue("@idcidade", cidade.idCidade);
             cmd.Parameters.AddWithValue("@idestado", cidade.idEstado);

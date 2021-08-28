@@ -38,7 +38,6 @@ namespace EfinanceCadastro.Controllers
 
         public ActionResult Create(FormCollection form)
         {
-            int idestado = 0;
             Estado estado = new Estado();
             EstadoModel estadoModel = new EstadoModel();
 
@@ -47,26 +46,15 @@ namespace EfinanceCadastro.Controllers
             estado.ufEstado = form["uf"];
 
             EstadoModel model = new EstadoModel();
-            idestado = model.CadastroEstado(estado);
+            model.CadastroEstado(estado);
 
             return RedirectToAction("Listar");
         }
+
         public ActionResult Sucesso()
         {
             return View();
         }
-
-        /*[HttpGet]
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return HttpNotFound();
-            }
-            EstadoModel model = new EstadoModel();
-            Estado estado = model.GetEstado(id);
-            return View(estado);
-        }*/
 
         [HttpGet]
         public ActionResult Delete(int? id)

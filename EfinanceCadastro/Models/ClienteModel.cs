@@ -22,12 +22,14 @@ namespace EfinanceCadastro.Models
             connection.Close();
         }
 
+
+
         public List<Cliente> Listar()
         {
             List<Cliente> lista = new List<Cliente>();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = connection;
-            cmd.CommandText = @"SELECT idcliente , nomecliente , telefonecliente , idcidade FROM cliente WHERE statuscliente = 'TRUE'";
+            cmd.CommandText = @" SELECT * FROM listarcliente ORDER BY nomecliente ";
 
             SqlDataReader reader = cmd.ExecuteReader();
 
@@ -38,6 +40,7 @@ namespace EfinanceCadastro.Models
                 cliente.idCidade = (int)reader["idcidade"];
                 cliente.nomeCliente = (String)reader["nomecliente"];
                 cliente.telefoneCliente = (String)reader["telefonecliente"];
+                cliente.cpfCnpjCliente = (String)reader["cpfcnpjcliente"];
 
                 lista.Add(cliente);
             }
@@ -45,13 +48,20 @@ namespace EfinanceCadastro.Models
             return lista;
         }
 
-        public int CadastroCliente(Cliente cliente)
+
+        public void CadastroCliente(Cliente cliente)
         {
-            int idCliente = 0;
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = connection;
-            cmd.CommandText = @" INSERT INTO cliente(nomecliente,telefonecliente,cpfcnpjcliente,idcidade) "
-                             + " VALUES (@nome,@telefone,@cpfcnpj,@idcidade)                     ";
+            /*cmd.CommandText = @" INSERT INTO cliente(nomecliente,telefonecliente,cpfcnpjcliente,idcidade) "
+                             + " VALUES (@nome,@telefone,@cpfcnpj,@idcidade)                              ";*/
+            cmd.CommandText = @"EXECUTE crudCliente                "
+                           + "@pidcliente = 0,                     "
+                           + "@pidcidade = @idcidade ,             "
+                           + "@pnome = @nome,                      "
+                           + "@ptelefone = @telefone,              "
+                           + "@pcpfcnpj = @cpfcnpj ,               "
+                           + "@ptipo = 'I'                         ";
 
             cmd.Parameters.AddWithValue("@nome", cliente.nomeCliente);
             cmd.Parameters.AddWithValue("@telefone", cliente.telefoneCliente);
@@ -59,14 +69,6 @@ namespace EfinanceCadastro.Models
             cmd.Parameters.AddWithValue("@idcidade", cliente.idCidade);
 
             SqlDataReader dataReader = cmd.ExecuteReader();
-
-            if (dataReader.HasRows)
-            {
-                dataReader.Read();
-                idCliente = Convert.ToInt32(dataReader["idcliente"]);
-            }
-            dataReader.Close();
-            return (idCliente);
         }
 
         public Cliente GetCliente(int? id)
@@ -74,7 +76,7 @@ namespace EfinanceCadastro.Models
             Cliente cliente = new Cliente();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = connection;
-            cmd.CommandText = @"SELECT * FROM cliente WHERE idcliente= @id AND statuscliente = 'TRUE' ";
+            cmd.CommandText = @"SELECT * FROM listarcliente WHERE idcliente= @id AND statuscliente = 'TRUE' ";
             cmd.Parameters.AddWithValue("@id", id);
 
             SqlDataReader reader = cmd.ExecuteReader();
@@ -94,7 +96,14 @@ namespace EfinanceCadastro.Models
         {
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = connection;
-            cmd.CommandText = @"UPDATE cliente SET statuscliente = 'FALSE' WHERE idcliente = @id";
+            /*cmd.CommandText = @"UPDATE cliente SET statuscliente = 'FALSE' WHERE idcliente = @id";*/
+            cmd.CommandText = @"EXECUTE crudCliente                "
+                           + "@pidcliente = @id,                   "
+                           + "@pidcidade = 0 ,                     "
+                           + "@pnome = '',                         "
+                           + "@ptelefone = '',                     "
+                           + "@pcpfcnpj = '' ,                     "
+                           + "@ptipo = 'D'                         ";
 
             cmd.Parameters.AddWithValue("@id", id);
 
@@ -105,8 +114,15 @@ namespace EfinanceCadastro.Models
         {
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = connection;
-            cmd.CommandText = @" UPDATE cliente SET  nomecliente = @nome , telefonecliente = @telefone "
-                              +" , cpfcnpjcliente = @cpfcnpj , idcidade = @idcidade WHERE idcliente = @idcliente                ";
+            /*cmd.CommandText = @" UPDATE cliente SET  nomecliente = @nome , telefonecliente = @telefone              "
+                              +" , cpfcnpjcliente = @cpfcnpj , idcidade = @idcidade WHERE idcliente = @idcliente      ";*/
+            cmd.CommandText = @"EXECUTE crudCliente                "
+                           + "@pidcliente = @idcliente,            "
+                           + "@pidcidade = @idcidade ,             "
+                           + "@pnome = @nome,                      "
+                           + "@ptelefone = @telefone,              "
+                           + "@pcpfcnpj = @cpfcnpj ,               "
+                           + "@ptipo = 'U'                         ";
 
             cmd.Parameters.AddWithValue("@idcliente", cliente.idCliente);
             cmd.Parameters.AddWithValue("@nome", cliente.nomeCliente);

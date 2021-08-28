@@ -28,7 +28,7 @@ namespace EfinanceCadastro.Models
             List<Estado> lista = new List<Estado>();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection =connection;
-            cmd.CommandText = @"SELECT idestado,codufestado,nomeestado,ufestado FROM estado WHERE statusestado = 'TRUE'";
+            cmd.CommandText = @" SELECT * FROM listarestado ORDER BY ufestado ";
 
             SqlDataReader reader = cmd.ExecuteReader();
 
@@ -46,27 +46,24 @@ namespace EfinanceCadastro.Models
             return lista;
         }
 
-        public int CadastroEstado(Estado estado)
+        public void CadastroEstado(Estado estado)
         {
-            int idEstado = 0;
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = connection;
-            cmd.CommandText = @" INSERT INTO estado(codufestado,nomeestado,ufestado) OUTPUT Inserted.idestado "
-                             + " VALUES (@coduf,@nome,@uf)                                                    ";
+            /*cmd.CommandText = @" INSERT INTO estado(codufestado,nomeestado,ufestado) OUTPUT Inserted.idestado "
+                             + " VALUES (@coduf,@nome,@uf)                                                    ";*/
+            cmd.CommandText = @"EXECUTE crudEstado              "
+                            + "@pidestado = 0,                  "
+                            + "@pnome = @nome,                  "
+                            + "@pcoduf = @coduf,                "
+                            + "@puf = @uf,                      "
+                            + "@ptipo = 'I'                     ";
 
             cmd.Parameters.AddWithValue("@coduf", estado.codUfEstado);
             cmd.Parameters.AddWithValue("@nome", estado.nomeEstado);
             cmd.Parameters.AddWithValue("@uf", estado.ufEstado);
 
             SqlDataReader dataReader = cmd.ExecuteReader();
-
-            if (dataReader.HasRows)
-            {
-                dataReader.Read();
-                idEstado = Convert.ToInt32(dataReader["idestado"]);
-            }
-            dataReader.Close();
-            return (idEstado);
         }
 
         public Estado GetEstado(int? id)
@@ -74,7 +71,7 @@ namespace EfinanceCadastro.Models
             Estado estado = new Estado();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = connection;
-            cmd.CommandText = @"SELECT * FROM estado WHERE idestado= @id AND statusestado = 'TRUE' ";
+            cmd.CommandText = @"SELECT * FROM listarestado WHERE idestado= @id AND statusestado = 'TRUE' ";
             cmd.Parameters.AddWithValue("@id", id);
 
             SqlDataReader reader = cmd.ExecuteReader();
@@ -93,7 +90,13 @@ namespace EfinanceCadastro.Models
         {
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = connection;
-            cmd.CommandText = @"UPDATE estado SET statusestado = 'FALSE' WHERE idestado = @id";
+            //cmd.CommandText = @"UPDATE estado SET statusestado = 'FALSE' WHERE idestado = @id";
+            cmd.CommandText = @"EXECUTE crudEstado              "
+                            + "@pidestado = @id,                "
+                            + "@pnome = '',                     "
+                            + "@pcoduf = '',                    "
+                            + "@puf = '',                       "
+                            + "@ptipo = 'D'                     ";
 
             cmd.Parameters.AddWithValue("@id", id);
 
@@ -104,8 +107,14 @@ namespace EfinanceCadastro.Models
         {
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = connection;
-            cmd.CommandText = @" UPDATE estado SET codufestado = @coduf , nomeestado = @nome , "
-                              +" ufestado = @uf WHERE idestado = @idestado                     ";
+            /*cmd.CommandText = @" UPDATE estado SET codufestado = @coduf , nomeestado = @nome , "
+                              +" ufestado = @uf WHERE idestado = @idestado                     ";*/
+            cmd.CommandText = @"EXECUTE crudEstado              "
+                            + "@pidestado = @idestado,          "
+                            + "@pnome = @nome,                  "
+                            + "@pcoduf = @coduf,                "
+                            + "@puf = @uf,                      "
+                            + "@ptipo = 'U'                     ";
 
             cmd.Parameters.AddWithValue("@idestado", estado.idEstado);
             cmd.Parameters.AddWithValue("@coduf", estado.codUfEstado);

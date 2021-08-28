@@ -40,17 +40,16 @@ namespace EfinanceCadastro.Controllers
 
         public ActionResult Create(FormCollection form)
         {
-            int idCliente = 0;
             Cliente cliente = new Cliente();
             ClienteModel ClienteModel = new ClienteModel();
                     
             cliente.nomeCliente = form["nome"];
-            cliente.telefoneCliente = form["telefone"];
-            cliente.cpfCnpjCliente = form["cpfcnpj"];
+            cliente.telefoneCliente = String.Join("", System.Text.RegularExpressions.Regex.Split(form["telefone"], @"[^\d]"));
+            cliente.cpfCnpjCliente = String.Join("", System.Text.RegularExpressions.Regex.Split(form["cpfcnpj"], @"[^\d]"));
             cliente.idCidade = Convert.ToInt32(form["idcidade"]);
 
             ClienteModel model = new ClienteModel();
-            idCliente = model.CadastroCliente(cliente);
+            model.CadastroCliente(cliente);
 
             return RedirectToAction("Listar");
         }
@@ -85,7 +84,14 @@ namespace EfinanceCadastro.Controllers
 
             ClienteModel modelCliente = new ClienteModel();
 
-            return View(cliente);
+            using (CidadeModel modelCidade = new CidadeModel())
+            {
+                List<Cidade> listacidade = modelCidade.Listar();
+                ViewBag.DadosCidade = listacidade;
+            }
+
+            ViewBag.DadosCliente = cliente;
+            return View();
 
         }
 
@@ -95,8 +101,8 @@ namespace EfinanceCadastro.Controllers
             ClienteModel ClienteModel = new ClienteModel();
             cliente.idCliente = Convert.ToInt32(form["id"]);
             cliente.nomeCliente = form["nome"];
-            cliente.telefoneCliente = form["telefone"];
-            cliente.cpfCnpjCliente = form["cpfcnpj"];
+            cliente.telefoneCliente = String.Join("", System.Text.RegularExpressions.Regex.Split(form["telefone"], @"[^\d]"));
+            cliente.cpfCnpjCliente = String.Join("", System.Text.RegularExpressions.Regex.Split(form["cpfcnpj"], @"[^\d]")); 
             cliente.idCidade = Convert.ToInt32(form["idcidade"]);
 
             ClienteModel.Alterar(cliente);

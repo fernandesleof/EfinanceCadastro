@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	$("#form").validate({
+	$("#formcadastroestado").validate({
 		rules:{
 			nome:{
 				required: true,

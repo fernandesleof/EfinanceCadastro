@@ -35,28 +35,24 @@
                                 <div class="col-lg-8">
                                     <div class="form-group">
                                         <label>Nome</label>
-                                        <input class="form-control" type="text" name="nome" id="nome" required>
+                                        <input class="form-control" type="text" name="nome" id="nome" maxlength="60" required>
                                     </div>
                                     <div class="form-group">
-                                        <label>Telefone</label>
-                                        <input class="form-control" type="text" name="telefone" id="telefone">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>CPF ou CNPJ</label>
-                                        <input class="form-control" type="text" name="cpfcnpj" id="cpfcnpj" placeholder="ex: SP" required>
-                                    </div>
-                                    <!--<div class="form-group">
-                                        <label>Código Cidade</label>
-                                        <input class="form-control" type="text" name="idcidade" id="idcidade" placeholder="ex: SP" required>
-                                    </div>-->
-                                    <div class="form-group">
-                                        <label>Estado</label>
+                                        <label>Cidade</label>
                                         <select class="form-control" name="idcidade">
                                             @foreach (var cidade in Model)
                                             {
                                                 <option value="@cidade.idCidade">@cidade.nomeCidade</option>
                                             }
                                         </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Telefone</label>
+                                        <input class="form-control" type="text" name="telefone" id="telefone" maxlength="12" data-mask="(00)00000-0000" placeholder="ex:(17)91122-3344">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>CPF ou CNPJ</label>
+                                        <input class="form-control" type="text" name="cpfcnpj" id="cpfcnpj" maxlength="14" required>
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
@@ -87,8 +83,6 @@
     <script src="@Url.Content("~/dist/js/sb-admin-2.js")"></script>
     <script src="@Url.Content("~/Script/input-mask.min.js")"></script>
     <script src="@Url.Content("~/Scripts/input-mask.js")"></script>
-    <script src="@Url.Content("~/Scripts/validar.js")"></script>
-    <script src="@Url.Content("~/Scripts/validate.min.js")"></script>
     <script src="@Url.Content("~/Scripts/jquery-3.3.1.min.js")"></script>
 </body>
 </html>
